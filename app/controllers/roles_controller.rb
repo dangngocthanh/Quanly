@@ -16,7 +16,20 @@ class RolesController < ApplicationController
   end
 
   def edit
+    @role = Role.find(params[:id])
+  end
 
+  def update
+    @role = Role.find(params[:id])
+    if @role.update(name: params['role']['name'])
+      redirect_to action: :index
+    end
+  end
+
+  def destroy
+    if Role.delete(params[:id])
+      redirect_to action: :index
+    end
   end
 
 end
